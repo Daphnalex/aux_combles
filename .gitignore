@@ -1,4 +1,9 @@
 
 # dependencies
 /node_modules
+
+#folder and files 
 /public
+config.js
+aux_combles
+aux_combles.pub
