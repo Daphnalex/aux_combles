@@ -17,6 +17,8 @@ module.exports.login = (req,res) => {
             console.log(req.body.password);
             console.log(user.password);
             bcrypt.compare(req.body.password,user.password, (err,result) => {
+                console.log(err);
+                console.log(result);
                 if (result == true){
                     var token = jwt.sign(
                         {

@@ -3,11 +3,12 @@ const Realisation = require('../sequelize').Realisation;
 const fs = require('fs');
 
 module.exports.realisationAddOne = (req,res) => {
+    console.log('create realisation',req.body);
     var newRealisation = new Realisation({
         title: req.body.title,
         description: req.body.description,
-        //dateOfRealisation: req.body.dateOfRealisation,
-        mainPicture: req.body.mainPicture
+        mainPicture: req.body.mainPicture,
+        pictures: req.body.pictures
     });
     newRealisation.save().then(realisation => {
         res.json(realisation);
@@ -27,7 +28,7 @@ module.exports.realisationGetAll = (req,res) => {
     Realisation.findAll()
         .then(realisations => {
             res.json(realisations);
-            console.log(realisations);
+            console.log('REALISATIONS',realisations);
         })
         .catch(err => res.status(400).json(err));
 };

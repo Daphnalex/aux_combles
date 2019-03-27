@@ -1,5 +1,6 @@
 module.exports = (sequelize, type) => {
-    var Realisation = sequelize.define('realisation', {
+    console.log('sequelize',sequelize);
+    var Realisation = sequelize.define('Realisation', {
         id: {
             type: type.INTEGER,
             primaryKey: true,
@@ -20,12 +21,12 @@ module.exports = (sequelize, type) => {
         mainPicture: {
             allowNull: true,
             type: type.JSON
-        }
-        //customer review
-        /*customerReview: {
+        },
+        pictures: {
             allowNull: true,
-            type: type.STRING
-        }*/
+            type: type.JSON
+        }
     });
+    
     return Realisation;
 }

@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-    var User = sequelize.define('user', {
+    var User = sequelize.define('User', {
         id: {
             type: type.INTEGER,
             primaryKey: true,
@@ -19,7 +19,8 @@ module.exports = (sequelize, type) => {
         },
         isAdmin: {
             allowNull: false,
-            type: type.TINYINT
+            type: type.TINYINT,
+            defaultValue: false
         },
         createdAt: {
             defaultValue: new Date(),
