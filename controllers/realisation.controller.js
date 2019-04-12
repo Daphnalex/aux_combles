@@ -34,7 +34,9 @@ module.exports.realisationGetAll = (req,res) => {
 };
 
 module.exports.realisationUpdate = (req,res) => {
-    Realisation.findById(req.params.realisationId)
+    console.log("params",req.params.realisationId);
+    console.log("body",req.body);
+    Realisation.findByPk(req.body.realisationId)
         .then(realisation => {
             realisation.title = req.body.title || realisation.title;
             realisation.description = req.body.description || realisation.description;
@@ -44,3 +46,10 @@ module.exports.realisationUpdate = (req,res) => {
         })
         .catch(err => res.json(err));
 };
+
+module.exports.realisationDeleteOne = (req,res) => {
+    Realisation.findByPk(req.params.realisationId)
+        .then(realisation => {
+            realisation.remove().then(()=> res.json({status: "deleted"})).catch(err => res.json(err));
+        })
+}

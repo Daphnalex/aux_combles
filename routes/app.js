@@ -3,7 +3,10 @@ const router = express.Router();
 
 const ctrlUser = require('../controllers/user.controller');
 const ctrlRealisation = require('../controllers/realisation.controller');
+const ctrlFile = require('../controllers/file.controller');
+
 const multer = require('multer');
+const fs = require('fs');
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -32,7 +35,8 @@ router
 router
     .route('/realisations/:realisationId')
     .get(ctrlRealisation.realisationGetOne)
-    .put(ctrlRealisation.realisationUpdate);
+    .put(ctrlRealisation.realisationUpdate)
+    .delete(ctrlRealisation.realisationDeleteOne);
 
 router
     .route('/upload')
@@ -57,7 +61,11 @@ router
             console.log('FILES RECEIVED',req.files);
             return res.send({success: true, files: req.files});
         }
-    })
+    });
+
+router
+    .route('/delete-files')
+    .delete(ctrlFile.fileDeleteOne);
 
 
 module.exports = router;
