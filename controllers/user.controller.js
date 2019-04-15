@@ -11,14 +11,9 @@ module.exports.login = (req,res) => {
         }
     }).then(user => {
         if (!user){
-            console.log('USER NOT FOUND');
             res.status(404).json({success:false, token: null, error: 'Nom d\'utilsateur non trouvé.'});
         } else {
-            console.log(req.body.password);
-            console.log(user.password);
             bcrypt.compare(req.body.password,user.password, (err,result) => {
-                console.log(err);
-                console.log(result);
                 if (result == true){
                     var token = jwt.sign(
                         {
@@ -29,11 +24,9 @@ module.exports.login = (req,res) => {
                         keys.secret,
                         {expiresIn: 3600}
                     );
-                    console.log('USER FOUND');
                     res.status(200).json({success: true, token: token});
                 } else {
                     res.status(401).json({success:false, token: null, error: 'Mot de passe invalide.'});
-                    console.log('PASSWORD INCORRECT');
                 }
             })
         }
