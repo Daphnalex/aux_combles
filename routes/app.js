@@ -44,7 +44,7 @@ router
         //console.log('ICI',req)
         if (!req.file){
             //console.log('NO FILE RECEIVED');
-            res.send({success: false });
+            res.status(500).json({success: false});
         } else {
             //console.log('FILE RECEIVED');
             return res.send({success: true, file: req.file});

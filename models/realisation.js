@@ -19,7 +19,7 @@ module.exports = (sequelize, type) => {
             type: type.DATE
         },
         mainPicture: {
-            allowNull: true,
+            allowNull: false,
             type: type.JSON
         },
         pictures: {
