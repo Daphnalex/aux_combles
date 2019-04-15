@@ -27,6 +27,7 @@ module.exports.realisationGetOne = (req,res) => {
 module.exports.realisationGetAll = (req,res) => {
     Realisation.findAll()
         .then(realisations => {
+            console.log('ALL REALISATION',realisations);
             res.status(200).json(realisations);
         })
         .catch(err => res.status(500).json(err));
@@ -47,14 +48,18 @@ module.exports.realisationUpdate = (req,res) => {
 };
 
 module.exports.realisationDeleteOne = (req,res) => {
+    console.log('DELETE REALISATION WITH THE ID',req.params.realisationId);
+    console.log('DELETE THIS REALISATION',req.body);
     Realisation
-        .findByPk(req.params.realisationId)
-        .then(realisation => {
-            realisation.remove().then(()=>{
-                res.status(400).json({success: true})
-            });
+        .destroy({
+            where: {
+                id: req.params.realisationId
+            }
         })
+        .then(() => res.status(200).json({success: true, message:"Realisation deleted"}))
         .catch(err => {
-           res.status(500).json(err);
+            console.log('error',err);
+            res.status(500).json({success: false, message: err});
         });
+
 }
